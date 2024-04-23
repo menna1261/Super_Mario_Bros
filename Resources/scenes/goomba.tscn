@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://bgiutah6l5ncp"]
+
+[ext_resource type="Texture2D" uid="uid://dl0kuv8e1o6n3" path="res://Resources/Assets/Sprites/Goomba_Flat.png" id="1_fy3xv"]
+[ext_resource type="Script" path="res://Resources/Scripts/goomba.gd" id="1_x4g3g"]
+[ext_resource type="Texture2D" uid="uid://dhmodocnsu7ds" path="res://Resources/Assets/Sprites/Goomba_Walk1.png" id="2_8aabo"]
+[ext_resource type="Texture2D" uid="uid://cxtty1fuwy5ab" path="res://Resources/Assets/Sprites/Goomba_Walk2.png" id="3_tokoj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ptp2q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fy3xv")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8aabo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tokoj")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_61ppn"]
+size = Vector2(16, 16)
+
+[node name="Goomba" type="Area2D"]
+collision_layer = 4
+collision_mask = 25
+script = ExtResource("1_x4g3g")
+horizontal_speed = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ptp2q")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_61ppn")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 8)
+collision_mask = 18
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

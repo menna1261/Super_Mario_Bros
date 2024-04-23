@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://nuanc5xdynuk"]
+
+[ext_resource type="AudioStream" uid="uid://cdur5x3yvwmn6" path="res://Resources/new folder/Super Mario Bros. medley.mp3" id="1_faqxk"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_faqxk")
+volume_db = -27.13
+autoplay = true

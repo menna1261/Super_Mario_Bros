@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://demjmjlqlt23e"]
+
+[ext_resource type="Texture2D" uid="uid://d7iqe7ort45q" path="res://Resources/Assets/Sprites/Coin1.png" id="1_p3v7t"]
+[ext_resource type="Texture2D" uid="uid://boarwxnd8uqy8" path="res://Resources/Assets/Sprites/Coin2.png" id="2_xwawl"]
+[ext_resource type="Texture2D" uid="uid://rc8mt153lydh" path="res://Resources/Assets/Sprites/Coin3.png" id="3_5jick"]
+[ext_resource type="Texture2D" uid="uid://wn4dcjfa6g3m" path="res://Resources/Assets/Sprites/Coin4.png" id="4_4udfp"]
+[ext_resource type="Script" path="res://Resources/Scripts/coin.gd" id="5_thuu0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ksq18"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_p3v7t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xwawl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5jick")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4udfp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Coin" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ksq18")
+autoplay = "default"
+frame = 3
+frame_progress = 0.128707
+script = ExtResource("5_thuu0")

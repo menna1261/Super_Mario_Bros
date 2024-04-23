@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://cedqyju7slr7k"]
+
+[ext_resource type="Script" path="res://Resources/Scripts/koopa.gd" id="1_6od7b"]
+[ext_resource type="Texture2D" uid="uid://d0n6srd2hrk0i" path="res://Resources/Assets/Sprites/Koopa_Shell.png" id="1_p5cx3"]
+[ext_resource type="Texture2D" uid="uid://rq2r08kewwlo" path="res://Resources/Assets/Sprites/Koopa_Walk1.png" id="2_mav43"]
+[ext_resource type="Texture2D" uid="uid://b2q1ddi7o0ef" path="res://Resources/Assets/Sprites/Koopa_Walk2.png" id="3_os4dt"]
+[ext_resource type="Shape2D" uid="uid://d7ks4gs0aqw7" path="res://Resources/Resources_/collision_Shapes/koopa_shell_collision_shape.tres" id="5_647so"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ekn3d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_p5cx3")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mav43")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_os4dt")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Koopa" type="Area2D"]
+collision_layer = 4
+collision_mask = 25
+script = ExtResource("1_6od7b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ekn3d")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = ExtResource("5_647so")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 12)
+collision_mask = 18
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
